@@ -1,0 +1,404 @@
+@import url("../node_modules/swiper/css/swiper.min.css");
+@font-face {
+  font-family: 'Bangers';
+  src: local("Bangers-Regular");
+  src: url(../fonts/Bangers/Bangers-Regular.ttf);
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local("Roboto-Regular");
+  src: url(../fonts/Roboto/Roboto-Regular.ttf);
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+}
+
+.container {
+  width: 80%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+}
+
+.header {
+  height: 70px;
+  background-image: url(../img/BGimage.jpg);
+}
+
+.header .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.header p {
+  color: #fff;
+  font-family: "Bangers";
+  font-size: 3.4rem;
+  letter-spacing: 0.5rem;
+}
+
+.main {
+  margin-bottom: 30px;
+}
+
+.main .input-wrapper {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  margin-top: 70px;
+  margin-bottom: 50px;
+}
+
+.main input {
+  width: 83%;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background: url(../img/loupe.jpg) no-repeat left;
+  background-size: contain;
+  padding-left: 40px;
+  padding-right: 10px;
+  outline: none;
+  min-height: 100%;
+  box-sizing: border-box;
+  font-family: "Roboto";
+}
+
+.main .button {
+  font-size: 1.5rem;
+  font-family: "Bangers";
+  min-width: 55px;
+  width: 15%;
+  border: 1px solid #750606;
+  border-radius: 5px;
+  background-color: transparent;
+  -webkit-box-shadow: 4px 4px 2px #750606;
+          box-shadow: 4px 4px 2px #750606;
+  outline: none;
+  letter-spacing: 0.2rem;
+  -webkit-transition: ease .3s;
+  transition: ease .3s;
+}
+
+.button:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 6px 6px 2px #750606;
+          box-shadow: 6px 6px 2px #750606;
+  -webkit-transition: ease .3s;
+  transition: ease .3s;
+}
+
+.button:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  -webkit-transition: ease .3s;
+  transition: ease .3s;
+}
+
+.input-wrapper__keyboard {
+  position: absolute;
+  width: 55px;
+  height: 30px;
+  background: url(../img/keyboard.png) no-repeat center;
+  background-size: contain;
+  right: 22%;
+  top: 12%;
+  -webkit-transition: ease .3s;
+  transition: ease .3s;
+}
+
+.input-wrapper__keyboard:hover {
+  cursor: pointer;
+  -webkit-transition: ease .3s;
+  transition: ease .3s;
+}
+
+.input-wrapper__keyboard:hover::before {
+  content: 'keyboard';
+  position: absolute;
+  right: -10%;
+  top: -100%;
+  width: 70px;
+  height: 30px;
+  font-size: 1.4rem;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  font-family: "Bangers";
+}
+
+.input-wrapper__clear-btn {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: url(../img/clear.png) no-repeat center;
+  background-size: contain;
+  right: 18%;
+  top: 12%;
+  -webkit-transition: ease .3s;
+  transition: ease .3s;
+}
+
+.input-wrapper__clear-btn:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 3px 3px 2px #ebbbbb;
+          box-shadow: 3px 3px 2px #ebbbbb;
+  border-radius: 50%;
+  -webkit-transition: ease .3s;
+  transition: ease .3s;
+}
+
+.input-wrapper__clear-btn:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  -webkit-transition: ease .3s;
+  transition: ease .3s;
+}
+
+.input-wrapper__clear-btn:hover::before {
+  content: 'clear all';
+  position: absolute;
+  right: -70%;
+  top: -100%;
+  width: 70px;
+  height: 30px;
+  font-size: 1.4rem;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  font-family: "Bangers";
+}
+
+.slider {
+  position: relative;
+  height: 500px;
+}
+
+.swiper-container {
+  width: 90%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #702121;
+  height: 90%;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #702121;
+  outline: none;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #702121;
+}
+
+.footer {
+  height: 40px;
+  background-image: url(../img/BGimage.jpg);
+}
+
+.footer-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #fff;
+  font-size: 1.2rem;
+  font-family: "Roboto";
+  font-weight: 400;
+}
+
+.footer-wrapper a {
+  width: 70px;
+  height: 100%;
+  background: url(../img/git.png) no-repeat center;
+  background-size: cover;
+}
+
+.footer-wrapper a:hover {
+  width: 72px;
+}
+
+.keyboard-class {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 750px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  list-style: none;
+  font-family: Arial, Helvetica, sans-serif;
+  z-index: 11;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  background-color: #dfdbdb;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#AltLeft:hover::after,
+#AltRight:hover::after {
+  content: 'change language';
+  position: absolute;
+  left: 40%;
+  top: 104%;
+  width: 80px;
+  height: 50px;
+  font-size: 1.4rem;
+  text-align: center;
+  letter-spacing: 0.2rem;
+  font-family: "Bangers";
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 20%;
+  padding-top: 15px;
+  color: #fff;
+}
+
+.keyboard-disable {
+  display: none;
+}
+
+.btn-class {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  background-color: black;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  -webkit-box-shadow: 5px 5px 0 #494747;
+          box-shadow: 5px 5px 0 #494747;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.btn-class:hover {
+  background-color: #292828;
+  color: #4f6df1;
+}
+
+#Backspace,
+#ControlRight,
+#ControlLeft {
+  width: 80px;
+}
+
+#Delete {
+  width: 30px;
+}
+
+#CapsLock {
+  width: 90px;
+}
+
+#Enter {
+  width: 80px;
+}
+
+#Space {
+  width: 250px;
+}
+
+#ShiftLeft {
+  width: 130px;
+}
+
+.press-btn {
+  border-radius: 15px;
+  font-weight: bold;
+  color: #4f6df1;
+  -webkit-box-shadow: 5px 5px 0 #0934f1;
+          box-shadow: 5px 5px 0 #0934f1;
+  -webkit-transition: ease .2s;
+  transition: ease .2s;
+}
+
+.caps {
+  color: #4f6df1;
+  -webkit-box-shadow: 5px 5px 0 #0934f1;
+          box-shadow: 5px 5px 0 #0934f1;
+  font-weight: bold;
+}
+
+.textarea-class,
+.textarea-class:active,
+.textarea-class:focus {
+  outline: none;
+}
+
+.close-button {
+  position: absolute;
+  right: 1px;
+  top: -3px;
+  width: 15px;
+  height: 15px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+}
+/*# sourceMappingURL=style.css.map */
