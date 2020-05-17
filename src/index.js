@@ -1,7 +1,10 @@
 import { mySwiper } from './slider';
 import createKeyboard from './keyboard';
-import { getDataAboutMovie, getDataAboutDescription} from './request';
-import { getCard, appendMainSpinner, removeMainSpinner, createCardDescription, clearDescriptionField } from './helper';
+import { getDataAboutMovie, getDataAboutDescription } from './request';
+import {
+    appendMainSpinner, removeMainSpinner, clearDescriptionField, showFormMessage,
+} from './helper';
+import { getHtmlElementCard, getHtmlElementDescription } from './templates';
 
 const clearInputBtn = document.querySelector('.input-wrapper__clear-btn');
 const form = document.querySelector('form');
@@ -10,19 +13,41 @@ const fieldForMessage = document.querySelector('.field-for-message');
 const swiperWrapper = document.querySelector('.swiper-wrapper');
 let searchValue = inputField.value;
 
-document.addEventListener("DOMContentLoaded", async () => {
-    console.log('Привет! Смена языка на виртуальной клавиатуре - Alt')
+function showFullDescription() {
+    const spinnerWrapper = document.querySelector('.spinner-wrapper');
+    const descriptionWrapper = document.querySelector('.description-wrapper');
+    spinnerWrapper.addEventListener('click', async (event) => {
+        if (event.target.tagName === 'BUTTON') {
+            const bittonId = event.target.dataset.id;
+            const description = await getDataAboutDescription(bittonId);
+            const container = getHtmlElementDescription(description);
+            descriptionWrapper.append(container);
+        }
+    });
+}
+
+function renderCards(cards) {
+    cards.forEach((card, index) => {
+        const element = getHtmlElementCard(card, index);
+        swiperWrapper.append(element);
+    });
+    mySwiper.update();
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
     const cards = await getDataAboutMovie();
     renderCards(cards);
     mySwiper.slideTo(0, 400, false);
     mySwiper.update();
     removeMainSpinner();
+    showFullDescription();
 });
 
 function chooseTitle() {
-    const arr = ['man', 'god', 'women', 'sleep', 'moon', 'sun', 'life', 'dog', 'cat', 'avatar']
+    const arr = ['man', 'god', 'women', 'sleep', 'moon', 'sun', 'life', 'dog', 'cat', 'avatar'];
     arr.sort(() => Math.random() - 0.5);
-    searchValue = arr[0];
+    const someInd = 0;
+    searchValue = arr[someInd];
     return searchValue;
 }
 inputField.value = chooseTitle();
@@ -34,11 +59,12 @@ function clearInput() {
 
 clearInputBtn.addEventListener('click', () => {
     clearInput();
-})
+});
+
 
 const slider = document.querySelector('.slider');
 form.addEventListener('submit', async (e) => {
-    let page = 1;
+    const page = 1;
     e.preventDefault();
     if (inputField.value !== '') {
         appendMainSpinner();
@@ -48,8 +74,8 @@ form.addEventListener('submit', async (e) => {
         const cards = await getDataAboutMovie(page);
         removeMainSpinner();
         setTimeout(() => {
-            slider.classList.add('slow-appear');    
-        }, 1000)
+            slider.classList.add('slow-appear');
+        }, 1000);
         if (cards.length > 0) {
             clearDescriptionField();
             swiperWrapper.innerHTML = '';
@@ -58,10 +84,9 @@ form.addEventListener('submit', async (e) => {
             mySwiper.update();
         }
     } else {
-        fieldForMessage.innerHTML = 'Please enter a movie title'
-        fieldForMessage.classList.add('wrong');
+        showFormMessage();
     }
-})
+});
 
 const keyboardField = document.querySelector('.keyboard-class');
 const enterButton = document.getElementById('Enter');
@@ -75,8 +100,8 @@ enterButton.addEventListener('click', async () => {
         const cards = await getDataAboutMovie();
         removeMainSpinner();
         setTimeout(() => {
-            slider.classList.add('slow-appear');    
-        }, 1000)
+            slider.classList.add('slow-appear');
+        }, 1000);
         if (cards.length > 0) {
             clearDescriptionField();
             swiperWrapper.innerHTML = '';
@@ -85,51 +110,17 @@ enterButton.addEventListener('click', async () => {
             mySwiper.update();
         }
     } else {
-        fieldForMessage.innerHTML = 'Please enter a movie title'
-        fieldForMessage.classList.add('wrong');
+        showFormMessage();
     }
 });
 
 mySwiper.on('slideChange', async () => {
     const listOfSlides = document.getElementsByClassName('swiper-slide');
-    let page = listOfSlides.length / 10 + 1;
+    const page = listOfSlides.length / 10 + 1;
     if (mySwiper.activeIndex > mySwiper.previousIndex) {
         if (mySwiper.activeIndex === listOfSlides.length - 5) {
             const cards = await getDataAboutMovie(page);
             renderCards(cards);
         }
     }
-})
-
-function renderCards(cards) {
-    cards.forEach((card, index) => {
-        const element = getCard(card, index);
-        swiperWrapper.append(element);
-    })
-    mySwiper.update();
-}
-
-function showFullDescription(imdbIDList) {
-    let spinnerWrapper = document.querySelector('.spinner-wrapper');
-    const descriptionWrapper = document.querySelector('.description-wrapper');
-    spinnerWrapper.addEventListener('click', async (event) => {
-        if (event.target.classList.contains('description-btn')) {
-            const target = event.target;
-            for (let i = 0; i < imdbIDList.length; i++) {
-                if (target.classList.contains(`btn-${i}`)) {
-                    const description = await getDataAboutDescription(imdbIDList);
-                    const wrapperOfSlide = target.closest('div');
-                    const titleOfCurrentMovie = wrapperOfSlide.children[0].textContent;
-                    if (titleOfCurrentMovie === description[`${i}`].Title) {
-                        const container = createCardDescription(description[`${i}`]);
-                        descriptionWrapper.append(container);
-                    }
-                }
-            }
-        }
-    })
-};
-
-
-
-export { showFullDescription}
+});
